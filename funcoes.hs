@@ -16,8 +16,11 @@ comparar :: [String] -> [String]
 comparar (x:xs)
     -- caso base. Quando todos os termos da lista estão no dicionário, retorne a própria lista
     | null xs = [x | x <- x:xs]
-    -- outo caso base, para retornar toda a lista de palavras n existentes em dicio
-    | not (buscaDicionario x dicionario) = [x]
+    -- caso base para quando há itens não existentes no dicionário, retorne esses itens
+    -- outro caso base, para retornar toda a lista de palavras n existentes em dicio
+    | not (buscaDicionario x dicionario) = do
+        _ <- ignorar x
+        comparar xs
     -- quando o termo existir no dicionário, vá para o próximo termo
     | buscaDicionario x dicionario = comparar xs
 
@@ -29,6 +32,14 @@ buscaDicionario palavra (x:xs)
     | palavra /= x && null xs = False
     | palavra == x = True
     | otherwise = buscaDicionario palavra xs
+
+-- função chamada quando o usuário resolve aceitar a nova palavra.
+-- Adiciona o termo ao dicionário
+adicionar :: String -> [String]
+adicionar termo = termo:dicionario
+
+ignorar :: String -> [String]
+ignorar termo = termo:ignorados
 
 -- vamos comparar as palavras na lista de entrada e
 -- consultar o usuário para qual decisão deve ser
