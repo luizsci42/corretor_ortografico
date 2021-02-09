@@ -11,13 +11,19 @@ es dic saida ign = do
     -- se a linha não for nula, verifique se a palavra existe no dicionario
     if not (null linha) then
         -- se a palavra existe no dicionário
-        if buscaDicionario linha dicionario then do
+        if buscaDicionario linha dic then do
             print "Existe no dicionario"
             let saidaAtual = adicionar linha saida
             es dic saidaAtual ign
         -- se a palavra não existe no dicionário
         else do
-            -- pergunte ao usuário se ele quer adicionar ao dicionário, substituir ou ignorar
+            -- se tiver na lista de ignorados, apenas adicione à saída
+            if buscaDicionario linha ign then do
+                print "Esta em ignorados"
+                let saidaAtual = adicionar linha saida
+                es dic saidaAtual ign
+            else do
+                -- pergunte ao usuário se ele quer adicionar ao dicionário, substituir ou ignorar
             putStr "Nao existe no dicionario. "
             putStrLn "Deseja adicionar ao dicionario (a), substituir (s) ou ignorar (i)?"
             decisao <- getLine
@@ -45,7 +51,7 @@ es dic saida ign = do
             if decisao /= "a" && decisao /= "s" && decisao /= "i" then do
                 print "Opcao invalida"
             else do
-                return ()
+                return () 
     -- se a linha for vazia, mostre a lista de saída
     else do
         _ <- putStr "Saida: "
