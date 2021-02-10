@@ -4,6 +4,6 @@ Aplicação exemplo de corretor ortográfico, utilizando conceitos de programaç
 ## Execução
 Para executar, abra o ghci no terminal, carrega o módulo main, através do comando :l main, digite uma palavra e siga as instruções.
 
-> ghci
-> Prelude> :l main
-> *Main> main
+$ ghci
+$ Prelude> :l main
+$ *Main> main
