@@ -24,9 +24,10 @@ es dic saida ign = do
                 es dic saidaAtual ign
             else do
                 -- pergunte ao usuário se ele quer adicionar ao dicionário, substituir ou ignorar
-            putStr "Nao existe no dicionario. "
-            putStrLn "Deseja adicionar ao dicionario (a), substituir (s) ou ignorar (i)?"
+                putStr "Nao existe no dicionario. "
+                putStrLn "Deseja adicionar ao dicionario (a), substituir (s) ou ignorar (i)?"
             decisao <- getLine
+            putStrLn ("Você escolheu: " ++ decisao)
             if decisao == "a" then do
                 -- adicionar ao dicionário e atualizar a lista de saída
                 let dicAtualizado = adicionar linha dic
@@ -52,6 +53,7 @@ es dic saida ign = do
                 print "Opcao invalida"
             else do
                 return () 
+                
     -- se a linha for vazia, mostre a lista de saída
     else do
         _ <- putStr "Saida: "
